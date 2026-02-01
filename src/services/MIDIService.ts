@@ -1,6 +1,6 @@
 import * as Tone from 'tone';
 import { Midi } from '@tonejs/midi';
-import { Note, NotationData } from '../types/music';
+import type { NotationData } from "../types/music";
 
 class MIDIService {
   private synth: Tone.PolySynth | null = null;
@@ -87,7 +87,7 @@ class MIDIService {
     const track = midi.addTrack();
     
     // Set tempo
-    track.addTempo(0, notationData.tempo);
+    midi.header.tempos.push({ bpm: notationData.tempo, ticks: 0 });
     
     // Add notes
     notationData.notes.forEach(note => {
@@ -104,7 +104,7 @@ class MIDIService {
 
   downloadMIDI(notationData: NotationData, filename: string = 'composition.mid') {
     const midiData = this.exportToMIDI(notationData);
-    const blob = new Blob([midiData], { type: 'audio/midi' });
+    const blob = new Blob([new Uint8Array(midiData)], { type: 'audio/midi' });
     const url = URL.createObjectURL(blob);
     
     const a = document.createElement('a');

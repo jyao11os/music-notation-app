@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NotationData, NotationType, INSTRUMENTS } from '../types/music';
+import type { NotationData, NotationType } from '../types/music';
+import { INSTRUMENTS } from '../types/music';
 import './Controls.css';
 
 interface ControlsProps {

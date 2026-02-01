@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Stave, StaveNote, Voice, Formatter, Accidental, Annotation } from 'vexflow';
-import { NotationData } from '../types/music';
+import type { NotationData } from '../types/music';
 import './Notation.css';
 
 interface StaffNotationProps {
@@ -35,7 +35,7 @@ const StaffNotation: React.FC<StaffNotationProps> = ({ notationData }) => {
       // Convert notes to VexFlow format
       const vexNotes: StaveNote[] = [];
       
-      notationData.notes.forEach((note, index) => {
+      notationData.notes.forEach((note) => {
         const octave = Math.floor(note.pitch / 12) - 1;
         const noteValue = note.pitch % 12;
         const noteNames = ['c', 'c', 'd', 'd', 'e', 'f', 'f', 'g', 'g', 'a', 'a', 'b'];
@@ -62,8 +62,9 @@ const StaffNotation: React.FC<StaffNotationProps> = ({ notationData }) => {
 
         // Add lyric if present
         if (note.lyric) {
-          staveNote.addAnnotation(0, 
-            new Annotation(note.lyric).setVerticalJustification(Annotation.VerticalJustify.BOTTOM)
+          staveNote.addModifier(
+            new Annotation(note.lyric).setVerticalJustification(Annotation.VerticalJustify.BOTTOM),
+            0
           );
         }
 
@@ -72,8 +73,8 @@ const StaffNotation: React.FC<StaffNotationProps> = ({ notationData }) => {
 
       if (vexNotes.length > 0) {
         const voice = new Voice({
-          num_beats: notationData.timeSignatures[0].numerator,
-          beat_value: notationData.timeSignatures[0].denominator,
+          numBeats: notationData.timeSignatures[0].numerator,
+          beatValue: notationData.timeSignatures[0].denominator,
         });
         voice.setStrict(false);
         voice.addTickables(vexNotes);

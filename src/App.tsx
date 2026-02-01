@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Keyboard from './components/Keyboard';
 import StaffNotation from './components/StaffNotation';
@@ -7,7 +7,8 @@ import Controls from './components/Controls';
 import NoteEditor from './components/NoteEditor';
 import MIDIService from './services/MIDIService';
 import PDFExportService from './services/PDFExportService';
-import { NotationData, NotationType, DEFAULT_NOTATION_DATA, Note } from './types/music';
+import type { NotationData, NotationType, Note } from './types/music';
+import { DEFAULT_NOTATION_DATA } from './types/music';
 import './App.css';
 
 function App() {
@@ -122,7 +123,7 @@ function App() {
     setNotationData(prev => ({ ...prev, lyrics }));
   };
 
-  const handleLanguageChange = (lang: string) => {
+  const handleLanguageChange = () => {
     // Language change is handled by i18next
   };
 

@@ -1,4 +1,4 @@
-import { KeyMapping } from '../types/music';
+import type { KeyMapping } from '../types/music';
 
 // Map computer keyboard keys to piano keys (2 octaves starting from C4)
 // White keys: A S D F G H J K L ; '

@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { NotationData, NotationType } from '../types/music';
+import type { NotationData, NotationType } from '../types/music';
 
 class PDFExportService {
   async exportToPDF(
