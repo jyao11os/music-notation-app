@@ -38,6 +38,14 @@
     "tone": "^15.1.22",
     "vexflow": "^5.0.0"
   },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "core-js",
+      "electron",
+      "electron-winstaller",
+      "esbuild"
+    ]
+  },
   "build": {
     "appId": "com.musicnotation.studio",
     "productName": "Music Notation Studio",

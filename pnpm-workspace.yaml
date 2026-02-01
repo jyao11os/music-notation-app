@@ -1,5 +1,0 @@
-ignoredBuiltDependencies:
-  - core-js
-  - electron
-  - electron-winstaller
-  - esbuild
