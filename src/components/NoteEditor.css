@@ -1,0 +1,167 @@
+.note-editor-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.editor-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.note-count {
+  font-size: 14px;
+  color: #666;
+  background-color: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.editor-empty {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-size: 16px;
+}
+
+.batch-lyrics-section {
+  margin-bottom: 20px;
+}
+
+.lyrics-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.lyrics-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.lyrics-textarea:focus {
+  outline: none;
+  border-color: #2c5f2d;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-item {
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.note-item:hover {
+  border-color: #2c5f2d;
+  background-color: #f9f9f9;
+}
+
+.note-item.selected {
+  border-color: #2c5f2d;
+  background-color: #f0f7f0;
+}
+
+.note-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.note-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background-color: #e0e0e0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.note-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c5f2d;
+}
+
+.note-duration {
+  font-size: 14px;
+  color: #666;
+}
+
+.note-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-item label {
+  font-size: 12px;
+  color: #666;
+}
+
+.input-small,
+.select-small {
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.input-small:focus,
+.select-small:focus {
+  outline: none;
+  border-color: #2c5f2d;
+}
+
+.btn-delete {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #8b4513;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-delete:hover {
+  background-color: #6f3710;
+}

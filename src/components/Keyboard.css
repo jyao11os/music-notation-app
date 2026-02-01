@@ -1,0 +1,100 @@
+.keyboard-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.keyboard {
+  position: relative;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.key {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transition: all 0.05s ease;
+}
+
+.white-key {
+  width: 48px;
+  height: 180px;
+  background-color: #ffffff;
+  border: 1px solid #333;
+  border-radius: 0 0 4px 4px;
+  padding-bottom: 10px;
+  z-index: 1;
+}
+
+.white-key:hover {
+  background-color: #f0f0f0;
+}
+
+.white-key.active {
+  background-color: #4a90e2;
+  transform: translateY(2px);
+}
+
+.black-key {
+  position: absolute;
+  width: 32px;
+  height: 110px;
+  background-color: #333;
+  border: 1px solid #000;
+  border-radius: 0 0 3px 3px;
+  z-index: 2;
+  padding-bottom: 8px;
+}
+
+.black-key:hover {
+  background-color: #555;
+}
+
+.black-key.active {
+  background-color: #2a5fa0;
+  transform: translateY(2px);
+}
+
+.key-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.black-key .key-label {
+  color: #fff;
+}
+
+.key-hint {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.black-key .key-hint {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.white-key.active .key-label,
+.white-key.active .key-hint {
+  color: #fff;
+}
+
+.black-key.active .key-hint {
+  background-color: rgba(255, 255, 255, 0.3);
+}
