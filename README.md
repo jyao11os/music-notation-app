@@ -1,6 +1,6 @@
 # Music Notation Studio
 
-A professional music notation application for macOS that supports keyboard-based music input, MIDI playback/saving, dual notation systems (staff and numbered), PDF export, and bilingual UI (English/Simplified Chinese).
+A simple music notation application for macOS that supports keyboard-based music input, MIDI playback/saving, dual notation systems (staff and numbered), PDF export, and bilingual UI (English/Simplified Chinese).
 
 ## Features
 
@@ -177,7 +177,7 @@ Then open `http://localhost:5173` in your browser.
 
 ## Future Enhancements
 
-See the feasibility analysis document for potential audio-to-MIDI transcription feature.
+The author is studying the possibility of an audio-to-MIDI transcription feature.
 
 ## License
 
