@@ -6,21 +6,81 @@ class MIDIService {
   private synth: Tone.PolySynth | null = null;
   private currentPart: Tone.Part | null = null;
   private isInitialized = false;
+  private currentInstrument: string = 'piano';
 
   async initialize() {
     if (this.isInitialized) return;
     
     await Tone.start();
-    this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
-    this.synth.set({
-      envelope: {
-        attack: 0.02,
-        decay: 0.1,
-        sustain: 0.3,
-        release: 1,
-      },
-    });
+    this.updateInstrument('piano');
     this.isInitialized = true;
+  }
+
+  updateInstrument(instrument: string) {
+    if (this.synth) {
+      this.synth.dispose();
+    }
+
+    this.currentInstrument = instrument;
+    
+    // Simple synthesis mapping for different instruments
+    let settings: any = {
+      oscillator: { type: 'triangle' },
+      envelope: { attack: 0.02, decay: 0.1, sustain: 0.3, release: 1 }
+    };
+
+    switch (instrument) {
+      case 'piano':
+        settings = {
+          oscillator: { type: 'triangle' },
+          envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 1.2 }
+        };
+        break;
+      case 'guitar':
+        settings = {
+          oscillator: { type: 'sawtooth' },
+          envelope: { attack: 0.05, decay: 0.3, sustain: 0.1, release: 0.8 }
+        };
+        break;
+      case 'violin':
+        settings = {
+          oscillator: { type: 'sine' },
+          envelope: { attack: 0.2, decay: 0.1, sustain: 0.8, release: 0.5 }
+        };
+        break;
+      case 'flute':
+        settings = {
+          oscillator: { type: 'sine' },
+          envelope: { attack: 0.1, decay: 0.2, sustain: 0.6, release: 0.3 }
+        };
+        break;
+      case 'trumpet':
+        settings = {
+          oscillator: { type: 'sawtooth' },
+          envelope: { attack: 0.05, decay: 0.1, sustain: 0.7, release: 0.2 }
+        };
+        break;
+      case 'clarinet':
+        settings = {
+          oscillator: { type: 'square' },
+          envelope: { attack: 0.08, decay: 0.1, sustain: 0.5, release: 0.4 }
+        };
+        break;
+      case 'saxophone':
+        settings = {
+          oscillator: { type: 'sawtooth' },
+          envelope: { attack: 0.1, decay: 0.2, sustain: 0.6, release: 0.3 }
+        };
+        break;
+      case 'cello':
+        settings = {
+          oscillator: { type: 'sine' },
+          envelope: { attack: 0.3, decay: 0.2, sustain: 0.9, release: 0.8 }
+        };
+        break;
+    }
+
+    this.synth = new Tone.PolySynth(Tone.Synth, settings).toDestination();
   }
 
   async playNote(pitch: number, velocity: number = 80) {
@@ -41,13 +101,14 @@ class MIDIService {
   async playSequence(notationData: NotationData) {
     if (!this.isInitialized) await this.initialize();
     
-    // Stop any currently playing sequence
+    // Ensure correct instrument is used
+    if (this.currentInstrument !== notationData.instrument) {
+      this.updateInstrument(notationData.instrument);
+    }
+
     this.stopSequence();
-    
-    // Set tempo
     Tone.getTransport().bpm.value = notationData.tempo;
     
-    // Create a part with all notes
     const events = notationData.notes.map(note => ({
       time: note.startTime,
       note: note.pitch,
@@ -85,11 +146,8 @@ class MIDIService {
   exportToMIDI(notationData: NotationData): Uint8Array {
     const midi = new Midi();
     const track = midi.addTrack();
-    
-    // Set tempo
     midi.header.tempos.push({ bpm: notationData.tempo, ticks: 0 });
     
-    // Add notes
     notationData.notes.forEach(note => {
       track.addNote({
         midi: note.pitch,
